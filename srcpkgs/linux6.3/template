@@ -1,5 +1,5 @@
 # Template file for 'linux6.2'
-pkgname=linux6.2
+pkgname=linux6.3
 version=6.3.3
 revision=1
 short_desc="Linux kernel and modules (${version%.*} series)"
@@ -13,8 +13,8 @@ if [ "${version##*.}" != 0 ]; then
 	skip_extraction="patch-${version}.xz"
 fi
 
-checksum="74862fa8ab40edae85bb3385c0b71fe103288bce518526d63197800b3cbdecb1
- 398b3d1187454f32b5168b7a01eb294f214634042d89ac79f82c56411566cb9b"
+checksum="ba3491f5ed6bd270a370c440434e3d69085fcdd528922fa01e73d7657db73b1e
+ 06941c036be21c9ec2f09f1e04b3e58b98c086ab6dee8d87a3a28f245259cd63"
 python_version=3
 
 # XXX Restrict archs until a proper <arch>-dotconfig is available in FILESDIR.
@@ -320,7 +320,7 @@ do_install() {
 	depmod -b ${DESTDIR}/usr -F System.map ${_kernver}
 	rm -f ${DESTDIR}/lib
 }
-linux6.2-headers_package() {
+linux6.3-headers_package() {
 	preserve=yes
 	nostrip=yes
 	noshlibprovides=yes
@@ -330,7 +330,7 @@ linux6.2-headers_package() {
 		vmove usr/lib/modules/${_kernver}/build
 	}
 }
-linux6.2-dbg_package() {
+linux6.3-dbg_package() {
 	preserve=yes
 	nostrip=yes
 	noverifyrdeps=yes
