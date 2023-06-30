@@ -1,0 +1,43 @@
+# Template file for 'rofi-wayland'
+pkgname=rofi-wayland
+version=1.7.5
+revision=1
+#archs="i686 x86_64"
+#wrksrc=
+#create_wrksrc=yes
+build_style=meson
+configure_args="-Dwayland=enabled -Dcheck=disabled -Dxcb=disabled"
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends="pkg-config glib-devel git flex bison autoconf automake make wayland-protocols"
+makedepends="pango-devel pangomm-devel cairomm-devel glibmm-devel gdk-pixbuf-devel
+ librsvg-devel libxdg-basedir-devel startup-notification-devel wayland-devel
+ libxkbcommon-devel"
+#depends=""
+short_desc="Window switcher, application launcher with only wayland support"
+maintainer="lz-coder <lzcoder@proton.me>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/lbonn/rofi"
+#changelog=""
+distfiles="https://github.com/lbonn/rofi"
+checksum="695404a14a294655fb2a270f17d0c0c9b17726973c744c6d4d8046b125e2fdfb"
+
+do_fetch() {
+	git clone ${distfiles} ${pkgname}-${version}
+}
+
+do_extract() {
+	echo $PWD
+}
+
+pre_build() {
+	cd ${XBPS_BUILDDIR}/${pkgname}-${version}
+	echo $PWD
+	git submodule update --init
+}
+
+do_build() {
+	meson compile -C build
+}
